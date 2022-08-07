@@ -1,4 +1,11 @@
-import { Box, Button, IconButton, Paper, SwipeableDrawer } from "@mui/material";
+import {
+  Box,
+  Button,
+  IconButton,
+  Paper,
+  Snackbar,
+  SwipeableDrawer,
+} from "@mui/material";
 import { Typography } from "antd";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
@@ -20,12 +27,19 @@ export default function Footer(props) {
     setItemList,
     setTotalPrice,
     setTotalProduct,
+    orderConfirmed,
+    setOrderConfirmed,
   } = useContext(globalContext);
   const [alert, setAlert] = useState(false);
 
   const loginToggle = () => {
-    setOpenCart(!openCart);
-    setDrawerMenu("login");
+    if (openCart) {
+      console.log("hey");
+      setDrawerMenu("login");
+    } else {
+      setOpenCart(!openCart);
+      setDrawerMenu("login");
+    }
   };
 
   const openCartToggle = () => {
@@ -36,11 +50,12 @@ export default function Footer(props) {
   const handlePayment = () => {
     setAlert(true);
     setOpenCart(!openCart);
-    setDrawerMenu("login");
+    setDrawerMenu("cart");
     setItemList([]);
     setTotalPrice(0);
     setTotalProduct(0);
-    setAlert(false);
+    setOrderConfirmed(!orderConfirmed);
+    console.log("order");
   };
   return (
     <Paper
@@ -84,7 +99,16 @@ export default function Footer(props) {
         <Typography>{product} Item(s)</Typography>
       </Box>
       <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}>
-        <Box sx={{ pr: 8, color: "whitesmoke", fontSize: "1.2rem" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-end",
+            pr: 8,
+            color: "whitesmoke",
+            fontSize: "1.2rem",
+          }}
+        >
           {drawerMenu === "cart" ? (
             <Button variant="filled" onClick={loginToggle}>
               Login
@@ -100,31 +124,25 @@ export default function Footer(props) {
           ) : (
             ""
           )}
+          <Box>
+            <ArrowForwardIcon sx={{ color: "whitesmoke" }} fontSize="medium" />
+          </Box>
         </Box>
         {alert && (
-          <Stack sx={{ width: "100%" }} spacing={2}>
+          <Snackbar
+            open={alert}
+            autoHideDuration={6000}
+            onClose={() => setAlert(!alert)}
+          >
             <Alert
+              onClose={() => setAlert(!alert)}
               severity="success"
-              action={
-                <IconButton
-                  aria-label="close"
-                  color="inherit"
-                  size="small"
-                  onClick={() => {
-                    setAlert(false);
-                  }}
-                >
-                  <CloseIcon fontSize="inherit" />
-                </IconButton>
-              }
+              sx={{ width: "100%" }}
             >
-              Order Confirmed— check it out!
+              Order Confirmed - check it out!
             </Alert>
-          </Stack>
+          </Snackbar>
         )}
-        <Box>
-          <ArrowForwardIcon sx={{ color: "whitesmoke" }} fontSize="medium" />
-        </Box>
       </Box>
     </Paper>
   );

@@ -17,17 +17,23 @@ export default function QuantityButton(props) {
     setItemList,
     mockData,
     setMockData,
+    orderConfirmed,
   } = useContext(globalContext);
 
   const [addText, setAddText] = useState(true);
   const [quantityVal, setQuantityVal] = useState(0);
   useEffect(() => {
     let quant = 0;
-    quant = itemList.filter((item) => {
-      return item.recipe === props.recipe;
-    });
-    console.log(quant, typeof quant);
-    quant.length && setQuantityVal(quant[0].totalQuantity);
+
+    if (itemList.length) {
+      quant = itemList.filter((item) => {
+        return item.recipe === props.recipe;
+      });
+      quant.length && setQuantityVal(quant[0].totalQuantity);
+    } else {
+      setQuantityVal(0);
+      orderConfirmed && setAddText(true);
+    }
   }, [itemList]);
 
   const setAdd = () => {

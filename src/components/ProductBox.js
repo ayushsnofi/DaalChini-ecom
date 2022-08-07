@@ -60,7 +60,9 @@ export default function ProductBox(props) {
           <Typography variant="h6" sx={{ pt: 1, pl: 1 }}>
             {props.recipe}
           </Typography>
-          <Typography sx={{ pl: 1 }}>{props.descp}</Typography>
+          <Typography sx={{ pl: 1, display: "flex", wordWrap: "break-word" }}>
+            {props.descp}
+          </Typography>
           <Box
             sx={{
               display: "flex",

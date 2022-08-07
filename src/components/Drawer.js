@@ -221,6 +221,17 @@ export default function SwipeableTemporaryDrawer() {
               padding: "2rem 1rem 2rem",
             }}
           >
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "center",
+              }}
+            >
+              <Typography variant="h5" sx={{ fontWeight: "600", pb: 2 }}>
+                Checkout
+              </Typography>
+            </Box>
             <Box>
               <Typography variant="h6" sx={{ fontWeight: "600", pb: 2 }}>
                 Pick up

@@ -7,7 +7,8 @@ export function GlobalContextProvider(props) {
   const [openCart, setOpenCart] = useState(false);
   const [totalPrice, setTotalPrice] = useState(0);
   const [itemList, setItemList] = useState([]);
-  const [drawerMenu, setDrawerMenu] = useState("login");
+  const [drawerMenu, setDrawerMenu] = useState("cart");
+  const [orderConfirmed, setOrderConfirmed] = useState(false);
 
   const totalPriceFunc = (prc) => {
     setTotalPrice(totalPrice + prc);
@@ -86,6 +87,8 @@ export function GlobalContextProvider(props) {
         setItemList,
         drawerMenu,
         setDrawerMenu,
+        orderConfirmed,
+        setOrderConfirmed,
       }}
     >
       {props.children}
