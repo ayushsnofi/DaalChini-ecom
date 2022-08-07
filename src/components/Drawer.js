@@ -17,7 +17,6 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import QuantityButton from "./QuantityButton";
 import ButtonBox from "./QuantiyButtonMini";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -30,9 +29,7 @@ export default function SwipeableTemporaryDrawer() {
     drawerMenu,
     setDrawerMenu,
     totalPrice,
-    s,
   } = useContext(globalContext);
-  const [state, setState] = React.useState(openCart);
   const [errorMessage, setErrorMessage] = useState(false);
   const [phoneNo, setPhoneNo] = useState(0);
   const [totalQuantity, setTotalQuantity] = useState(0);

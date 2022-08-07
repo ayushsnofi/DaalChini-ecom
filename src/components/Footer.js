@@ -40,6 +40,7 @@ export default function Footer(props) {
     setItemList([]);
     setTotalPrice(0);
     setTotalProduct(0);
+    setAlert(false);
   };
   return (
     <Paper
@@ -50,7 +51,7 @@ export default function Footer(props) {
         position: "fixed",
         zIndex: "10000",
         pb: 2,
-        mb: 5,
+        m: 0,
         backgroundColor: "#6ac06a",
         display: "flex",
         flexDirection: "row",
@@ -64,7 +65,7 @@ export default function Footer(props) {
           color: "whitesmoke",
           backgroundColor: "#1f8522",
           p: 1,
-          mb: 6,
+          // mb: 2,
           ml: 6,
           width: "9rem",
           borderRadius: "10px",

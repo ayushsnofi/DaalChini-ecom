@@ -5,6 +5,7 @@ import { Box } from "@mui/system";
 import { useContext, useLayoutEffect } from "react";
 import { globalContext } from "../context/GlobalContext";
 import { useState, useEffect } from "react";
+import { isCompositeComponentWithType } from "react-dom/test-utils";
 
 export default function QuantityButton(props) {
   const {
@@ -21,8 +22,13 @@ export default function QuantityButton(props) {
   const [addText, setAddText] = useState(true);
   const [quantityVal, setQuantityVal] = useState(0);
   useEffect(() => {
-    setQuantityVal(0);
-  }, []);
+    let quant = 0;
+    quant = itemList.filter((item) => {
+      return item.recipe === props.recipe;
+    });
+    console.log(quant, typeof quant);
+    quant.length && setQuantityVal(quant[0].totalQuantity);
+  }, [itemList]);
 
   const setAdd = () => {
     setAddText(false);
